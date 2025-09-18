@@ -38,6 +38,10 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+app.get('/', (req, res) => {
+    res.send("Hello")
+})
+
 setInterval(() => {
   axios.get(url)
   .then(() => console.log("Stay alive"))
