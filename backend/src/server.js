@@ -9,10 +9,11 @@ import userRoutes from "./routes/user.route.js";
 import chatRoutes from "./routes/chat.route.js";
 
 import { connectDB } from "./lib/db.js";
+import axios from "axios";
 
 const app = express();
 const PORT = process.env.PORT;
-
+const url = "https://o-chat-vfpl.onrender.com";
 const __dirname = path.resolve();
 
 app.use(
@@ -36,6 +37,12 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
+
+setInterval(() => {
+  axios.get(url)
+  .then(() => console.log("Stay alive"))
+  .catch((error) => console.error("Going to sleep",error))
+}, 14 * 60 * 1000)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
